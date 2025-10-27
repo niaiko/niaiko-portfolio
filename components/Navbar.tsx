@@ -16,7 +16,7 @@ export default function Navbar() {
   const navItems = [
     { name: t("nav.home"), href: "#home" },
     { name: t("nav.about"), href: "#about" },
-    { name: t("nav.projects"), href: "#projects" },
+    { name: "Portfolio", href: "#portfolio" },
     { name: t("nav.experience"), href: "#experience" },
     { name: t("nav.contact"), href: "#contact" },
   ];
@@ -44,7 +44,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/80 dark:bg-dark-bg/80 backdrop-blur-lg shadow-lg"
+            ? "bg-white/90 dark:bg-dark-bg/90 backdrop-blur-xl shadow-xl border-b border-gray-200/50 dark:border-gray-700/50"
             : "bg-transparent"
         }`}
       >
@@ -53,47 +53,68 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="#home" className="flex items-center space-x-2">
               <motion.div
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-2xl font-bold gradient-text"
+                className="relative"
               >
-                {"<AD />"}
+                <div className="text-2xl font-bold bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  {"<NR />"}
+                </div>
+                {/* Underline animation */}
+                <motion.div
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-600 to-purple-600"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
               </motion.div>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => (
-                <button
+                <motion.button
                   key={item.href}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium rounded-lg group"
                 >
                   {item.name}
-                </button>
+                  {/* Hover underline */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-600 to-purple-600 rounded-full"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
               ))}
+              
+              {/* Divider */}
+              <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-2" />
               
               {/* Language Toggle */}
               <motion.button
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setLanguage(language === "fr" ? "en" : "fr")}
-                className="p-2 rounded-lg bg-gray-200 dark:bg-dark-card text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-dark-border transition-colors flex items-center space-x-1"
+                className="p-2.5 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-dark-card dark:to-dark-border text-gray-800 dark:text-gray-200 hover:from-primary-100 hover:to-purple-100 dark:hover:from-primary-900/30 dark:hover:to-purple-900/30 transition-all flex items-center space-x-1.5 shadow-md hover:shadow-lg"
                 aria-label="Toggle language"
               >
-                <FaGlobe size={18} />
-                <span className="text-sm font-semibold">{language.toUpperCase()}</span>
+                <FaGlobe size={16} />
+                <span className="text-sm font-bold">{language.toUpperCase()}</span>
               </motion.button>
               
               {/* Theme Toggle */}
               <motion.button
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05, rotate: 180 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleTheme}
-                className="p-2 rounded-lg bg-gray-200 dark:bg-dark-card text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-dark-border transition-colors"
+                className="p-2.5 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-dark-card dark:to-dark-border text-gray-800 dark:text-gray-200 hover:from-primary-100 hover:to-purple-100 dark:hover:from-primary-900/30 dark:hover:to-purple-900/30 transition-all shadow-md hover:shadow-lg"
                 aria-label="Toggle theme"
               >
-                {theme === "dark" ? <FaSun size={20} /> : <FaMoon size={20} />}
+                {theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />}
               </motion.button>
             </div>
 

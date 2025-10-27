@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Projects from "@/components/Projects";
+import PortfolioShowcase from "@/components/PortfolioShowcase";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -16,7 +16,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
-      <Projects />
+      <PortfolioShowcase />
       <Experience />
       <Contact />
       <Footer />

@@ -31,7 +31,7 @@ import {
 } from "react-icons/si";
 import { FaCode, FaSmile, FaBriefcase, FaTools, FaServer } from "react-icons/fa";
 
-const iconMap: { [key: string]: any } = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   SiJavascript,
   SiTypescript,
   SiHtml5,
@@ -69,7 +69,7 @@ export default function About() {
   const { t } = useLanguage();
   
   return (
-    <section id="about" className="section-container bg-gray-50 dark:bg-dark-card/30">
+    <section id="about" className="section-container bg-gradient-to-br from-gray-50 via-white to-purple-50 dark:from-dark-card/30 dark:via-dark-bg dark:to-dark-card/50">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
@@ -84,7 +84,7 @@ export default function About() {
           </p>
         </motion.div>
 
-        {/* Stats Grid */}
+        {/* Stats Grid - Enhanced Design */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -97,22 +97,55 @@ export default function About() {
             return (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="card text-center"
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="relative group"
               >
-                <div className="flex justify-center mb-4">
-                  <div className="p-4 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                    <Icon className="text-3xl text-primary-600 dark:text-primary-400" />
+                <div className="relative bg-white dark:bg-dark-card rounded-2xl p-6 border-2 border-gray-200 dark:border-dark-border group-hover:border-primary-500 dark:group-hover:border-primary-500 transition-all shadow-lg group-hover:shadow-2xl overflow-hidden">
+                  {/* Background Gradient on Hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                    animate={{
+                      backgroundPosition: ["0% 0%", "100% 100%"],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  />
+                  
+                  <div className="relative z-10 text-center">
+                    {/* Icon */}
+                    <div className="flex justify-center mb-4">
+                      <motion.div
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                        className="p-4 bg-gradient-to-br from-primary-500 to-purple-600 rounded-xl shadow-lg"
+                      >
+                        <Icon className="text-3xl text-white" />
+                      </motion.div>
+                    </div>
+                    
+                    {/* Value */}
+                    <motion.h3
+                      initial={{ scale: 1 }}
+                      whileInView={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                      className="text-4xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent mb-2"
+                    >
+                      {stat.value}
+                    </motion.h3>
+                    
+                    {/* Label */}
+                    <p className="text-gray-600 dark:text-gray-400 font-medium">
+                      {stat.label}
+                    </p>
                   </div>
                 </div>
-                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  {stat.value}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
               </motion.div>
             );
           })}

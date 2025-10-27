@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaArrowDown } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaArrowDown, FaCode } from "react-icons/fa";
 import { personalInfo } from "@/lib/data";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Image from "next/image";
+import HeroBackground3D from "./HeroBackground3D";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -23,35 +23,13 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-dark-bg dark:via-dark-bg dark:to-dark-card"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-primary-500/10 to-purple-500/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [90, 0, 90],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-pink-500/10 to-primary-500/10 rounded-full blur-3xl"
-        />
-      </div>
+      {/* Three.js Background */}
+      <HeroBackground3D />
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-blue-50/80 to-purple-50/90 dark:from-dark-bg/95 dark:via-dark-bg/90 dark:to-dark-card/95" />
 
       {/* Content */}
       <div className="section-container relative z-10">
@@ -67,10 +45,23 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-block"
+              className="inline-flex items-center space-x-2"
             >
-              <span className="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 rounded-full text-sm font-medium">
-                👋 {t("hero.greeting")}
+              <motion.div
+                animate={{
+                  rotate: [0, 14, -8, 14, -4, 10, 0],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  repeatDelay: 3,
+                }}
+                className="text-3xl"
+              >
+                👋
+              </motion.div>
+              <span className="px-4 py-2 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900/30 dark:to-purple-900/30 text-primary-700 dark:text-primary-400 rounded-full text-sm font-medium shadow-lg">
+                {t("hero.greeting")}
               </span>
             </motion.div>
 
@@ -80,7 +71,7 @@ export default function Hero() {
               transition={{ delay: 0.3 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold"
             >
-              {t("hero.greeting")},{" "}
+              <span className="text-gray-900 dark:text-white">I&apos;m </span>
               <span className="gradient-text">{personalInfo.name}</span>
             </motion.h1>
 
@@ -150,7 +141,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Image/Visual */}
+          {/* Right Column - Animated Code Display */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -166,16 +157,114 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="relative w-80 h-80 lg:w-96 lg:h-96"
+              className="relative"
             >
-              {/* Decorative circles */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-purple-500 rounded-full blur-2xl opacity-20 animate-pulse" />
-              <div className="absolute inset-4 bg-gradient-to-tr from-pink-500 to-primary-500 rounded-full blur-xl opacity-30" />
-              
-              {/* Profile Image Placeholder */}
-              <div className="absolute inset-8 bg-gradient-to-br from-primary-600 to-purple-600 rounded-full flex items-center justify-center text-white text-8xl font-bold shadow-2xl">
-                {personalInfo.name.split(" ").map((n) => n[0]).join("")}
+              {/* Code Window */}
+              <div className="relative bg-gray-900 dark:bg-gray-950 rounded-2xl shadow-2xl overflow-hidden border border-gray-700 w-[400px]">
+                {/* Window Header */}
+                <div className="flex items-center space-x-2 px-4 py-3 bg-gray-800 dark:bg-gray-900 border-b border-gray-700">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                  </div>
+                  <div className="flex-1 text-center">
+                    <span className="text-xs text-gray-400 font-mono">developer.tsx</span>
+                  </div>
+                </div>
+
+                {/* Code Content */}
+                <div className="p-6 font-mono text-sm space-y-2">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-purple-400"
+                  >
+                    <span className="text-pink-500">const</span>{" "}
+                    <span className="text-blue-400">developer</span> ={" "}
+                    <span className="text-yellow-400">{"{"}</span>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="pl-4 text-gray-300"
+                  >
+                    name: <span className="text-green-400">&apos;{personalInfo.name.split(" ")[0]}&apos;</span>,
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.7 }}
+                    className="pl-4 text-gray-300"
+                  >
+                    role: <span className="text-green-400">&apos;Full Stack Dev&apos;</span>,
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="pl-4 text-gray-300"
+                  >
+                    skills: <span className="text-yellow-400">{"["}</span>
+                    <span className="text-green-400">&apos;React&apos;</span>,{" "}
+                    <span className="text-green-400">&apos;Node.js&apos;</span>
+                    <span className="text-yellow-400">{"]"}</span>,
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.9 }}
+                    className="pl-4 text-gray-300"
+                  >
+                    passion: <span className="text-green-400">&apos;Building Cool Stuff&apos;</span>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.0 }}
+                    className="text-yellow-400"
+                  >
+                    {"}"};
+                  </motion.div>
+                </div>
+
+                {/* Decorative glow */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-purple-500 to-pink-500 rounded-2xl opacity-20 blur-xl -z-10" />
               </div>
+
+              {/* Floating Icons */}
+              <motion.div
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [0, 5, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute -top-6 -left-6 p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg"
+              >
+                <FaCode className="text-white text-2xl" />
+              </motion.div>
+
+              <motion.div
+                animate={{
+                  y: [0, 10, 0],
+                  rotate: [0, -5, 0],
+                }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
+                className="absolute -bottom-6 -right-6 p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg"
+              >
+                <span className="text-white text-2xl">⚡</span>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
