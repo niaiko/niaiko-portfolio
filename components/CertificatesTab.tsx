@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { certificates } from "@/lib/data";
-import { FaCertificate, FaAward, FaExternalLinkAlt, FaDownload, FaEye, FaTimes, FaCheckCircle } from "react-icons/fa";
+import { FaAward, FaExternalLinkAlt, FaDownload, FaEye, FaTimes, FaCheckCircle } from "react-icons/fa";
 
 export default function CertificatesTab() {
   const [selectedCert, setSelectedCert] = useState<number | null>(null);
@@ -215,7 +215,7 @@ export default function CertificatesTab() {
                     className="flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 hover:from-primary-700 hover:via-purple-700 hover:to-pink-700 text-white rounded-xl transition-all shadow-xl hover:shadow-2xl"
                   >
                     <FaExternalLinkAlt className="text-lg" />
-                    <span className="font-bold">Vérifier l'authenticité</span>
+                    <span className="font-bold">Vérifier l&apos;authenticité</span>
                   </motion.a>
                 </div>
                 

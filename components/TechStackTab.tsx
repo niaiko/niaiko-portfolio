@@ -122,13 +122,8 @@ function SkillCard({
       <div className="bg-white dark:bg-dark-card rounded-2xl p-6 border-2 border-gray-200 dark:border-dark-border hover:border-primary-500 dark:hover:border-primary-500 transition-all shadow-lg hover:shadow-2xl">
         {/* Icon */}
         <div className="flex flex-col items-center space-y-3">
-          <div className="relative">
-            <Icon 
-              className={`text-5xl transition-colors duration-300 ${!isHovered ? 'text-gray-700 dark:text-gray-300' : ''}`}
-              style={{ 
-                color: isHovered ? iconColor : undefined 
-              }}
-            />
+          <div className="relative" style={{ color: isHovered ? iconColor : undefined }}>
+            <Icon className="text-5xl transition-colors duration-300" />
             
             {/* Glow Effect */}
             <motion.div

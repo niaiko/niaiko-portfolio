@@ -121,12 +121,9 @@ function MainTechCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Icon 
-        className={`text-4xl mb-2 transition-colors duration-300 ${!isHovered ? 'text-gray-700 dark:text-gray-300' : ''}`}
-        style={{ 
-          color: isHovered ? iconColor : undefined 
-        }}
-      />
+      <div style={{ color: isHovered ? iconColor : undefined }}>
+        <Icon className="text-4xl mb-2 transition-colors duration-300" />
+      </div>
       <span className="text-xs text-center text-gray-600 dark:text-gray-400">
         {skill.name}
       </span>
@@ -153,12 +150,9 @@ function SkillItem({
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Icon 
-            className="text-xl transition-colors duration-300"
-            style={{ 
-              color: isHovered ? iconColor : undefined 
-            }}
-          />
+          <div style={{ color: isHovered ? iconColor : undefined }}>
+            <Icon className="text-xl transition-colors duration-300" />
+          </div>
           <span className="font-medium text-gray-700 dark:text-gray-300">
             {skill.name}
           </span>
