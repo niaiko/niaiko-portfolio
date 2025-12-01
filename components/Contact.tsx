@@ -38,7 +38,7 @@ export default function Contact() {
       console.log("Form data:", data);
       setSubmitStatus("success");
       reset();
-    } catch (_error) {
+    } catch {
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
